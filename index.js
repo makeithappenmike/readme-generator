@@ -11,6 +11,16 @@ const questions = [
     },
     {
         type: "input",
+        message: "What is your Github Username?",
+        name: "username",
+    },
+    {
+        type: "input",
+        message: "What is your email address?",
+        name: "email",
+    },
+    {
+        type: "input",
         message: "Nice to meet you {NAME}. What's your new project called?",
         name: "title"
     },
@@ -25,12 +35,6 @@ const questions = [
         message: 'What type of licensing should this project have?',
         choices: ['MIT License', 'GNU GPLv3'],
     },
-    // {                               
-    //     type: "input",
-    //     message: "Do you want to add a Table of Contents?",
-    //     name: "toc"
-
-    // },
     // {
     //     type: "input",
     //     message: "What steps can be taken to install your project?",
@@ -64,19 +68,21 @@ inquirer
   .then((response) => {
     // Define individual responses
     var name = response.name;
+    var username = response.username;
+    var email = response.email;
     var title = response.title;
     var description = response.description;
-    var toc = response.toc;
+    var toc = "[Installation](#installation)<br />[Usage](#usage)<br />[Licensing](#licensing)<br />[Contributions](#contributions)<br />[Testing](#testing)<br />[howtoask](#howtoask)";
     var installation = response.installation;
     var usage = response.usage;
     var licensing = response.licensing;
     var badge = "";
     if (licensing === "GNU GPLv3") {
         badge = "\n\n[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)\n";
-        licenseDesc = "Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.";
+        licenseDesc = "\nPermissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.<p />For more information visit https://choosealicense.com/licenses/gpl-3.0/.";
     } else {
         badge = "\n\n[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n";
-        licenseDesc = "A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.";
+        licenseDesc = "\nA short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.<p />For more information visit https://choosealicense.com/licenses/mit/.";
     };
     var contributions = response.contributions;
     var testing = response.testing;
@@ -84,7 +90,7 @@ inquirer
     console.log(response);
     console.log("Name:", name);
     console.log("Title:", title);
-    var readMe = "# " + title + "\n By " + name + "\n" + badge + "\n## Description\n" + description + "\n## Table of Contents\n" + toc + "\n## Installation\n" + installation + "\n## Usage\n" + usage + "\n## Licensing\n This project is licensed under the " + licensing + "\n" + licenseDesc + "\n## Contributions\n" + contributions + "\n## Testing\n" + testing + "\n## How to Ask Questions\n" + howtoask;
+    var readMe = "# " + title + "\n By " + name + "\n" + badge + "\n## Description\n" + description + "\n## Table of Contents\n" + toc + "\n## Installation\n" + installation + "\n## Usage\n" + usage + "\n## Licensing\n This project is licensed under the " + licensing + ".\n" + licenseDesc + "\n## Contributions\n" + contributions + "\n## Testing\n" + testing + "\n## How to Ask Questions\n" + howtoask + ".<p />Find me on Github at https://github.com/" + username + ".<p />You can reach me at " + email + " if you have any questions.";
     writeToFile(readMe);
     // console.log("Description:", response.description);
     // console.log("TOC:", response.toc);
