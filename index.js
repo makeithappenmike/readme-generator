@@ -70,13 +70,19 @@ inquirer
     var installation = response.installation;
     var usage = response.usage;
     var licensing = response.licensing;
+    var badge = "";
+    if (licensing === "GNU GPLv3") {
+        badge = "\n\n[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)\n";
+    } else {
+        badge = "\n\n[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n";
+    };
     var contributions = response.contributions;
     var testing = response.testing;
     var howtoask = response.howtoask;
     console.log(response);
     console.log("Name:", name);
     console.log("Title:", title);
-    var readMe = "# " + title + "\n BY: " + name + "\n## Description\n" + description + "\n## Table of Contents\n" + toc + "\n## Installation\n" + installation + "\n## Usage\n" + usage + "\n## Licensing\n" + licensing + "\n## Contributions\n" + contributions + "\n## Testing\n" + testing + "\n## How to Ask Questions\n" + howtoask;
+    var readMe = "# " + title + "\n By " + name + "\n" + badge + "\n## Description\n" + description + "\n## Table of Contents\n" + toc + "\n## Installation\n" + installation + "\n## Usage\n" + usage + "\n## Licensing\n" + licensing + "\n## Contributions\n" + contributions + "\n## Testing\n" + testing + "\n## How to Ask Questions\n" + howtoask;
     writeToFile(readMe);
     // console.log("Description:", response.description);
     // console.log("TOC:", response.toc);
