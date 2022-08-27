@@ -73,8 +73,10 @@ inquirer
     var badge = "";
     if (licensing === "GNU GPLv3") {
         badge = "\n\n[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)\n";
+        licenseDesc = "Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.";
     } else {
         badge = "\n\n[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n";
+        licenseDesc = "A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.";
     };
     var contributions = response.contributions;
     var testing = response.testing;
@@ -82,7 +84,7 @@ inquirer
     console.log(response);
     console.log("Name:", name);
     console.log("Title:", title);
-    var readMe = "# " + title + "\n By " + name + "\n" + badge + "\n## Description\n" + description + "\n## Table of Contents\n" + toc + "\n## Installation\n" + installation + "\n## Usage\n" + usage + "\n## Licensing\n" + licensing + "\n## Contributions\n" + contributions + "\n## Testing\n" + testing + "\n## How to Ask Questions\n" + howtoask;
+    var readMe = "# " + title + "\n By " + name + "\n" + badge + "\n## Description\n" + description + "\n## Table of Contents\n" + toc + "\n## Installation\n" + installation + "\n## Usage\n" + usage + "\n## Licensing\n This project is licensed under the " + licensing + "\n" + licenseDesc + "\n## Contributions\n" + contributions + "\n## Testing\n" + testing + "\n## How to Ask Questions\n" + howtoask;
     writeToFile(readMe);
     // console.log("Description:", response.description);
     // console.log("TOC:", response.toc);
