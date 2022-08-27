@@ -14,15 +14,20 @@ const questions = [
         message: "Nice to meet you {NAME}. What's your new project called?",
         name: "title"
     },
-    // {
-    //     type: "input",
-    //     message: "Sounds amazing. Can you tell me a bit more about the project? Try to answer the following questions: What was your motivation? What problem does it solve? What's unique about it?'",
-    //     name: "description",
-    // },
+    {
+        type: "input",
+        message: "Sounds amazing. Can you tell me a bit more about the project? Try to answer the following questions: What was your motivation? What problem does it solve? What's unique about it?'",
+        name: "description",
+    },
+    {
+        type: 'list',
+        name: 'licensing',
+        message: 'What type of licensing should this project have?',
+        choices: ['MIT License', 'GNU GPLv3'],
+    },
     // {                               
-    //     type: "checkbox",
+    //     type: "input",
     //     message: "Do you want to add a Table of Contents?",
-    //     choices: ["yes", "no"],
     //     name: "toc"
 
     // },
@@ -33,14 +38,9 @@ const questions = [
     // },
     // {
     //     type: "input",
-    //     message: "After installalation, how can I use it? Also, how does someone use the app in the real world?",
+    //     message: "After installation, how can I use it? Also, how does someone use the app in the real world?",
     //     name: "usage"
-    // },  
-    // {
-    //     type: "input",
-    //     message: "What kind of licensing does this project have? Are there any restrictions on how it can be used?",
-    //     name: "licensing"
-    // }, 
+    // },
     // {
     //     type: "input",
     //     message: "Any notable contributors you want to mention? How can other contribute to the project in the future?",
@@ -67,7 +67,7 @@ inquirer
     var title = response.title;
     var description = response.description;
     var toc = response.toc;
-    var installalation = response.installalation;
+    var installation = response.installation;
     var usage = response.usage;
     var licensing = response.licensing;
     var contributions = response.contributions;
@@ -76,10 +76,11 @@ inquirer
     console.log(response);
     console.log("Name:", name);
     console.log("Title:", title);
-    writeToFile(response);
+    var readMe = "# " + title + "\n BY: " + name + "\n## Description\n" + description + "\n## Table of Contents\n" + toc + "\n## Installation\n" + installation + "\n## Usage\n" + usage + "\n## Licensing\n" + licensing + "\n## Contributions\n" + contributions + "\n## Testing\n" + testing + "\n## How to Ask Questions\n" + howtoask;
+    writeToFile(readMe);
     // console.log("Description:", response.description);
     // console.log("TOC:", response.toc);
-    // console.log("Installation:", response.installalation);
+    // console.log("Installation:", response.installation);
     // console.log("Usage:", response.usage);
     // console.log("Licensing:", response.licensing);
     // console.log("Contributions:", response.contributions);
@@ -88,8 +89,8 @@ inquirer
 });
 
 // TODO: Create a function to write README file
-function writeToFile(response) {
-    fs.writeFile("README.md", JSON.stringify(response), (err) => {
+function writeToFile(readMe) {
+    fs.writeFile("README.md", readMe, (err) => {
         if (err)
           console.log(err);
         else {
