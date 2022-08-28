@@ -51,7 +51,7 @@ const questions = [
         type: 'list',
         name: 'licensing',
         message: 'What type of licensing should this project have?',
-        choices: ['MIT License', 'GNU GPLv3', 'None']
+        choices: ['MIT', 'GNU GPLv3', 'None']
     },
     {
         type: "input",
@@ -102,17 +102,19 @@ inquirer
     if (!usage) {
         usage = "Usage TBD";
     };
-    var licensing = response.licensing;
+    var licensing = "This project is licensed under the " + response.licensing + " license.";
+    var licenseDesc = "";
     var badge = "";
-    if (licensing === "GNU GPLv3") {
+    if (licensing === "This project is licensed under the GNU GPLv3 license.") {
         badge = "\n\n[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)\n";
         licenseDesc = "\nPermissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.<p />For more information visit https://choosealicense.com/licenses/gpl-3.0/.";
-    } else if (licensing === "MIT") {
+    } else if (licensing === "This project is licensed under the MIT license.") {
         badge = "\n\n[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n";
         licenseDesc = "\nA short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.<p />For more information visit https://choosealicense.com/licenses/mit/.";
-    } else {
+    } else if (licensing === "This project is licensed under the None license.") {
         badge = "";
-        licenseDesc = "This project is not currently licensed.";
+        licenseDesc = "";
+        licensing = "This project is not currently licensed.";
     };
     var contributions = response.contributions;
     if (!contributions) {
@@ -122,7 +124,7 @@ inquirer
     if (!testing) {
         testing = "Testing TBD";
     };
-    var readMe = "# " + title + "\n" + name + "\n" + badge + "\n## Description\n" + description + "\n## Table of Contents\n" + toc + "\n## Installation\n" + installation + "\n## Usage\n" + usage + "\n## Licensing\n This project is licensed under " + licensing + ".\n" + licenseDesc + "\n## Contributions\n" + contributions + "\n## Testing\n" + testing + "\n## How to Ask Questions." + "<p />Find me on Github at https://github.com/" + username.toLowerCase() + ".<p />You can reach me at " + email.toLowerCase() + " if you have any questions.";
+    var readMe = "# " + title + "\n" + name + "\n" + badge + "\n## Description\n" + description + "\n## Table of Contents\n" + toc + "\n## Installation\n" + installation + "\n## Usage\n" + usage + "\n## Licensing\n" + licensing + "\n" + licenseDesc + "\n## Contributions\n" + contributions + "\n## Testing\n" + testing + "\n## How to Ask Questions." + "<p />Find me on Github at https://github.com/" + username.toLowerCase() + ".<p />You can reach me at " + email.toLowerCase() + " if you have any questions.";
     writeToFile(readMe);
 });
 
