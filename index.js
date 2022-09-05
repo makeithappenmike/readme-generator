@@ -72,76 +72,91 @@ const questions = [
     }, 
     {
         type: "input",
-        message: "Are their any tests written for this project? How can additional tests be written by others?",
+        message: "Are there any tests written for this project? How can additional tests be written by others?",
         name: "tests"
     }
 ];
 
-// Run inquirer
-inquirer
-  .prompt(questions)
-  .then((response) => {
-    // Define individual responses
-    var name = response.name;
-    // Only show By line if Name is not empty
-    if (!name) {
-        name = "";
-    } else {
-        name = "<p />By " + name;
-    };
-    var username = "\nFind me on Github at https://github.com/" + response.username.toLowerCase() + "<p/>";
-    var email = "You can reach me at " + response.email.toLowerCase() + " if you have any questions.";
-    var title = response.title;
-    var description = response.description;
-    // Show "TBD" if Description is empty
-    if (!description) {
-        description = "TBD";
-    };
-    var toc = "[Installation](#installation)<br />[Usage](#usage)<br />[License](#license)<br />[Contributing](#contributing)<br />[Tests](#tests)<br />[Questions](#questions)";
-    var installation = response.installation;
-    // Show "TBD" if Installation is empty
-    if (!installation) {
-        installation = "TBD";
-    };
-    var usage = response.usage;
-    // Show "TBD" if Usage is empty
-    if (!usage) {
-        usage = "TBD";
-    };
-    var licensing = "This project is licensed under the " + response.license + " license.";
-    var licenseDesc = "";
-    var badge = "";
-    // Show GNU Licence if chosen
-    if (licensing === "This project is licensed under the GNU GPLv3 license.") {
-        badge = "\n\n[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)\n";
-        licenseDesc = "\nPermissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.<p />For more information visit https://choosealicense.com/licenses/gpl-3.0/.";
-       // Show MIT Licence if chosen
-    } else if (licensing === "This project is licensed under the MIT license.") {
-        badge = "\n\n[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n";
-        licenseDesc = "\nA short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.<p />For more information visit https://choosealicense.com/licenses/mit/.";
+function prompt() {
+
+    // Run inquirer
+    inquirer
+    .prompt(questions)
+    .then((response) => {
+
+        // Define individual responses
+        var name = response.name;
+
+        // Only show By line if Name is not empty
+        if (!name) {
+            name = "";
+        } else {
+            name = "<p />By " + name;
+        };
+        var username = "\nFind me on Github at https://github.com/" + response.username.toLowerCase() + "<p/>";
+        var email = "You can reach me at " + response.email.toLowerCase() + " if you have any questions.";
+        var title = response.title;
+        var description = response.description;
+
+        // Show "TBD" if Description is empty
+        if (!description) {
+            description = "TBD";
+        };
+        var toc = "[Installation](#installation)<br />[Usage](#usage)<br />[License](#license)<br />[Contributing](#contributing)<br />[Tests](#tests)<br />[Questions](#questions)";
+        var installation = response.installation;
+
+        // Show "TBD" if Installation is empty
+        if (!installation) {
+            installation = "TBD";
+        };
+        var usage = response.usage;
+
+        // Show "TBD" if Usage is empty
+        if (!usage) {
+            usage = "TBD";
+        };
+        var licensing = "This project is licensed under the " + response.license + " license.";
+        var licenseDesc = "";
+        var badge = "";
+
+        // Show GNU Licence if chosen
+        if (licensing === "This project is licensed under the GNU GPLv3 license.") {
+            badge = "\n\n[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)\n";
+            licenseDesc = "\nPermissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.<p />For more information visit https://choosealicense.com/licenses/gpl-3.0/.\n";
+        
+        // Show MIT Licence if chosen
+        } else if (licensing === "This project is licensed under the MIT license.") {
+            badge = "\n\n[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n";
+            licenseDesc = "\nA short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.<p />For more information visit https://choosealicense.com/licenses/mit/.";
+
         // Show No Licence if chosen
-    } else if (licensing === "This project is licensed under the None license.") {
-        badge = "";
-        licenseDesc = "";
-        licensing = "This project is not currently licensed.";
-    };
-    var contributing = response.contributing;
-    // Show "TBD" if Contributing is empty
-    if (!contributing) {
-        contributing = "TBD";
-    };
-    var tests = response.tests;
-    // Show "TBD" if Tests is empty
-    if (!tests) {
-        tests = "TBD";
-    };
-    // Build readMe string based on answers
-    var readMe = "# " + title + "\n" + name + "\n" + badge + "\n## Description\n" + description + "\n## Table of Contents\n" + toc + "\n## Installation\n" + installation + "\n## Usage\n" + usage + "\n## License\n" + licensing + "\n" + licenseDesc + "\n## Contributing\n" + contributing + "\n## Tests\n" + tests + "\n## Questions" + username + email;
-    writeToFile(readMe);
-});
+        } else if (licensing === "This project is licensed under the None license.") {
+            badge = "";
+            licenseDesc = "";
+            licensing = "This project is not currently licensed.";
+        };
+        var contributing = response.contributing;
+
+        // Show "TBD" if Contributing is empty
+        if (!contributing) {
+            contributing = "TBD";
+        };
+        var tests = response.tests;
+
+        // Show "TBD" if Tests is empty
+        if (!tests) {
+            tests = "TBD";
+        };
+
+        // Build readMe string based on answers
+        var readMe = "# " + title + "\n" + name + "\n" + badge + "\n## Description\n" + description + "\n## Table of Contents\n" + toc + "\n## Installation\n" + installation + "\n## Usage\n" + usage + "\n## License\n" + licensing + "\n" + licenseDesc + "\n## Contributing\n" + contributing + "\n## Tests\n" + tests + "\n## Questions" + username + email;
+        writeToFile(readMe);
+    });
+}
 
 // Create a function to write README file
 function writeToFile(readMe) {
+
     // Create "Generated" file to retain repo's README.md
     fs.writeFile("README(GENERATED).md", readMe, (err) => {
         if (err)
@@ -154,8 +169,11 @@ function writeToFile(readMe) {
       });
 }
 
-// TODO: Create a function to initialize app
-function init() {}
+// Create a function to initialize app
+// I wrapped my inquirer in prompt() but its a bit redundant as I'm handling everything int he reponse of the inquire in the first place
+function init() {
+    prompt();
+}
 
 // Function call to initialize app
 init();
